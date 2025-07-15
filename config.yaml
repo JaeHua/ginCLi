@@ -1,0 +1,27 @@
+app:
+  name: "Gin_CLi"
+  mode: "debug"
+  port: 8080
+
+log:
+  level: "debug"
+  filename: "gin_cli.log"
+  max_size: 200
+  max_age: 30
+  max_backups: 20
+
+mysql:
+  host: "127.0.0.1"
+  port: 3306
+  user: "root"
+  password: "jh529529"
+  dbname: "gin_cli"
+  max_idle_conns: 10
+  max_open_conns: 100
+
+redis:
+  host: "127.0.0.1"
+  port: 6379
+  db: 0
+  password: ""
+  pool_size: 10
