@@ -16,8 +16,6 @@ import (
 	"time"
 
 	"go.uber.org/zap"
-
-	"github.com/spf13/viper"
 )
 
 // GoWeb开发通用脚手架
@@ -28,20 +26,20 @@ func main() {
 		return
 	}
 	//2.初始化日志
-	if err := logger.Init(); err != nil {
+	if err := logger.Init(settings.Conf.Log); err != nil {
 		fmt.Printf("init logger failed, err:%v", err)
 		return
 	}
 	defer zap.L().Sync()
 	zap.L().Debug("logger init success")
 	//3.初始化MYSQL
-	if err := mysql.Init(); err != nil {
+	if err := mysql.Init(settings.Conf.MySQL); err != nil {
 		fmt.Printf("init mysql failed, err:%v", err)
 		return
 	}
 	defer mysql.Close()
 	//4.初始化Redis
-	if err := redis.Init(); err != nil {
+	if err := redis.Init(settings.Conf.Redis); err != nil {
 		fmt.Printf("init redis failed, err:%v", err)
 		return
 	}
@@ -51,7 +49,7 @@ func main() {
 	//6.启动服务
 
 	srv := &http.Server{
-		Addr:    fmt.Sprintf("%s", viper.GetInt("app.port")),
+		Addr:    fmt.Sprintf(":%d", settings.Conf.App.Port), // 从配置中获取端口号
 		Handler: r,
 	}
 

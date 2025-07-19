@@ -2,6 +2,7 @@ app:
   name: "Gin_CLi"
   mode: "debug"
   port: 8080
+  version: "1.0.1"
 
 log:
   level: "debug"
